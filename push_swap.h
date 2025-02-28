@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/28 02:36:45 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/02/28 18:12:02 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int					is_space(char c);
 int					ft_strlen(char *str);
 void				free_array(char **str);
 t_list				*fill_stack_a(char **av);
-void    swap(t_list **stack);
-void    rotate(t_list **stack);
-void    push(t_list **stack1, t_list **stack2);
-void    ss(t_list **stack1, t_list **stack2);
-void    rr(t_list **stack1, t_list **stack2);
-void    reverse_rotate(t_list **stack);
-int 	get_minValue_index(t_list *stack);
-int 	get_stack_size(t_list *stack);
-int 	empty_stack(t_list *stack);
+void				swap(t_list **stack);
+void				rotate(t_list **stack);
+void				push(t_list **stack1, t_list **stack2);
+void				ss(t_list **stack1, t_list **stack2);
+void				rr(t_list **stack1, t_list **stack2);
+void				reverse_rotate(t_list **stack);
+int					get_min_value_index(t_list *stack);
+int					get_stack_size(t_list *stack);
+int					empty_stack(t_list *stack);
 
 #endif

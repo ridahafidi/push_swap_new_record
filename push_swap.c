@@ -15,8 +15,8 @@
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	
 	int		stack_size;
+
 	if (ac > 1)
 	{
 		stack_a = fill_stack_a(av);

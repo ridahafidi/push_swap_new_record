@@ -6,13 +6,13 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 00:04:05 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/28 00:25:59 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/02/28 18:09:53 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	valid_nbr(char *str)
+static int	valid_nbr(char *str)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ void	free_array(char **str)
 	str = NULL;
 }
 
-void	handle_parsing(t_list **stack, char *str)
+static void	handle_parsing(t_list **stack, char *str)
 {
 	char	**parsed_str;
 	int		i;
@@ -64,7 +64,7 @@ void	handle_parsing(t_list **stack, char *str)
 		{
 			ft_lstclear(stack);
 			free_array(parsed_str);
-			ft_putstr_fd("There is an invalid argument\n", 2);
+			ft_putstr_fd("ERROR: There is an invalid argument\n", 2);
 			exit(0);
 		}
 		i++;

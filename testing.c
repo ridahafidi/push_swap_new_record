@@ -5,10 +5,9 @@ int	main(int ac, char **av)
 	int i;
 
 	i = 1;
-	while(av[i])
+	while (av[i])
 	{
 		printf("%s\n", av[i]);
 		i++;
 	}
-	
 }
