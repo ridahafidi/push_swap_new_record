@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/28 18:12:02 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/01 01:17:15 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@ typedef struct s_list
 	int				value;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_var
+{
+	int	size;
+	int	div;
+	int	offset;
+	int	start;
+	int	end;
+	int	mid;
+}				t_var;
 
 int					ft_atoi(const char *nptr);
 void				ft_lstadd_front(t_list **lst, t_list *new,
@@ -45,5 +55,6 @@ void				reverse_rotate(t_list **stack);
 int					get_min_value_index(t_list *stack);
 int					get_stack_size(t_list *stack);
 int					empty_stack(t_list *stack);
+void				quick_sort(int *arr, int start, int end);
 
 #endif
