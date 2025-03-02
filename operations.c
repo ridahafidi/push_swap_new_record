@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 00:26:56 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/28 18:11:00 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/01 17:11:24 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void	push(t_list **stack1, t_list **stack2)
 {
 	t_list	*tmp_stack1;
 
+	if (!(*stack1)->next)
+	{
+		tmp_stack1 = *stack1;
+		*stack1 = NULL;
+		tmp_stack1->next = *stack2;
+		(*stack2) = tmp_stack1;
+		return ;
+	}
 	tmp_stack1 = *stack1;
 	*stack1 = (*stack1)->next;
 	tmp_stack1->next = *stack2;

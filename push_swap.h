@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/01 01:17:15 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/02 00:56:01 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ typedef struct s_var
 	int	start;
 	int	end;
 	int	mid;
+	int	count_bottom;
+	int	expected_max;
+	int	max_index_arr;
 }				t_var;
 
 int					ft_atoi(const char *nptr);
@@ -56,5 +59,7 @@ int					get_min_value_index(t_list *stack);
 int					get_stack_size(t_list *stack);
 int					empty_stack(t_list *stack);
 void				quick_sort(int *arr, int start, int end);
+void 				sort_stack(t_list **stack_a);
+void	print_stack(t_list *stack);
 
 #endif

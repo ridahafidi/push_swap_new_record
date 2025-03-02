@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 00:04:05 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/28 18:09:53 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/02 01:00:44 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ static void	handle_parsing(t_list **stack, char *str)
 t_list	*fill_stack_a(char **av)
 {
 	int		i;
-	char	**parsed_av;
 	t_list	*stack;
-	t_list	*tmp;
 
 	stack = NULL;
 	i = 1;

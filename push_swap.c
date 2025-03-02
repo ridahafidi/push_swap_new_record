@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:55 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/28 02:52:55 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/02 01:00:15 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	int		stack_size;
 
 	if (ac > 1)
 	{
 		stack_a = fill_stack_a(av);
 		if (!stack_a)
 			return (0);
-		stack_size = get_stack_size(stack_a);
-		if (stack_size <= 15)
-			printf("hamid\n");
-		else
-			printf("large\n");
+		sort_stack(&stack_a);
+		while(stack_a)
+		{
+			printf("%d\n", stack_a->value);
+			stack_a = stack_a->next;
+		}
 	}
 	else
 		ft_putstr_fd("wrong usage\n", 2);
