@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:55 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/02 01:00:15 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/03 02:34:05 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ int	main(int ac, char **av)
 		if (!stack_a)
 			return (0);
 		sort_stack(&stack_a);
-		while(stack_a)
-		{
-			printf("%d\n", stack_a->value);
-			stack_a = stack_a->next;
-		}
+		// print_stack(stack_a);
 	}
 	else
 		ft_putstr_fd("wrong usage\n", 2);

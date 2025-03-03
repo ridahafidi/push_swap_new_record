@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/02 00:56:01 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/03 00:05:42 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void				push(t_list **stack1, t_list **stack2);
 void				ss(t_list **stack1, t_list **stack2);
 void				rr(t_list **stack1, t_list **stack2);
 void				reverse_rotate(t_list **stack);
-int					get_min_value_index(t_list *stack);
+int					get_max_value_index(t_list *stack);
 int					get_stack_size(t_list *stack);
 int					empty_stack(t_list *stack);
 void				quick_sort(int *arr, int start, int end);

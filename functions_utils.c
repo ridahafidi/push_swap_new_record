@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:04:03 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/02 00:55:38 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/03 00:04:51 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ int	get_stack_size(t_list *stack)
 	return (length);
 }
 
-int	get_min_value_index(t_list *stack)
+int	get_max_value_index(t_list *stack)
 {
 	int	index;
 	int	i;
-	int	min;
+	int	max;
 
-	index = 0;
+	index = -1;
 	i = 0;
-	min = stack->value;
+	max = stack->value;
 	while (stack)
 	{
-		if (min > stack->value)
+		if (max < stack->value)
 		{
-			min = stack->value;
+			max = stack->value;
 			index = i;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 00:42:39 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/02 01:02:29 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/03 02:36:20 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int *create_sorted_array(t_list *stack_a, int stack_len)
     
     i = 0;
     arr = malloc(sizeof(int) * stack_len);
+    if (!arr)
+        return (NULL);
     while (i < stack_len)
     {
         arr[i] = stack_a->value;
@@ -31,7 +33,7 @@ int *create_sorted_array(t_list *stack_a, int stack_len)
 
 void   collect_var(t_var *var)
 {
-    var->div = var->size / 2;
+    var->div = 18;
     var->mid = (var->size / 2) - 1;
     var->offset = var->size / var->div;
     var->start = var->mid - var->offset;
@@ -41,13 +43,27 @@ void   collect_var(t_var *var)
     var->max_index_arr = 0;
 }
 
-void    pb_and_check(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
+
+void   update_range(t_var *var)
 {
-    push(stack_a, stack_b);
-    if ((*stack_b)->next)
+    var->start = var->start - var->offset;
+    if (var->start < 0)
+        var->start = 0;
+    var->end = var->offset + var->end;
+    if (var->end >= var->size)
+        var->end = var->size - 1;
+}
+
+void    push_b_and_rotate(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
+{
+    if (!empty_stack(*stack_a))
     {
-        if ((*stack_b)->value < arr[var->mid])
-            rotate(stack_b);
+        (push(stack_a, stack_b), ft_putstr_fd("pb\n", 1));
+        if ((*stack_b)->next)
+        {
+            if ((*stack_b)->value <= arr[var->mid])
+                (rotate(stack_b), ft_putstr_fd("rb\n", 1));
+        }
     }
 }
 
@@ -56,194 +72,221 @@ void    look_top_in_range(t_list **stack_a, t_list **stack_b, t_var *var, int *a
     int i;
 
     i = var->start;
-    while (i <= var->end)
+    while(!empty_stack(*stack_a) && i <= var->end)
     {
-        if (arr[i] == (*stack_a)->value)
-            pb_and_check(stack_a, stack_b, var, arr);
+        if ((*stack_a)->value == arr[i])
+            push_b_and_rotate(stack_a, stack_b, var, arr);
         i++;
     }
 }
 
-void    get_value_to_top(t_list **stack_a, t_var *var, int *arr)
+int get_val_index(t_list *stack, int value)
 {
-    int value_index;
-    t_list  *tmp_stack_a;
+    int val_i;
 
-    value_index = 0;
-    tmp_stack_a = *stack_a;
-    while (tmp_stack_a && tmp_stack_a->value != *arr)
+    val_i = 0;
+    while(stack)
     {
-        value_index++;
-        tmp_stack_a = tmp_stack_a->next;
+        if (stack->value == value)
+            return (val_i);
+        val_i++;
+        stack = stack->next;
     }
-    if (value_index <= var->mid)
-    {
-        while ((*stack_a)->value != *arr)
-            rotate(stack_a);   
-    }
-    else
-    {
-        while ((*stack_a)->value != *arr)
-            reverse_rotate(stack_a);
-    }
+    return (-1);
 }
 
+void    get_it_top(t_list **stack_a, t_var *var, int *arr, int i)
+{
+    int value;
+    int value_index;
+
+    value = arr[i];
+    value_index = get_val_index(*stack_a, value);
+    if (value_index > -1)
+    {
+        if (value_index <= (get_stack_size(*stack_a) / 2))
+            {
+                while ((*stack_a)->value != value)
+                    (rotate(stack_a), ft_putstr_fd("ra\n", 1));
+            }
+        else
+            {
+                while ((*stack_a)->value != value)
+                    (reverse_rotate(stack_a), ft_putstr_fd("rra\n", 1));
+            }
+    }
+}
 void    look_in_stack(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
 {
-    t_list  *tmp_stack_a;
     int i;
-
+    t_list *tmp_stack_a;
+    
     i = var->start;
     tmp_stack_a = *stack_a;
-    while (i < var->end)
+    while(tmp_stack_a)
     {
-        tmp_stack_a = *stack_a;
-        while (tmp_stack_a)
+        i = 0;
+        while(i <= var->end)
         {
-            if (tmp_stack_a->value == arr[i])
+            if (arr[i] == tmp_stack_a->value)
             {
-                get_value_to_top(stack_a, var, &arr[i]);
-                pb_and_check(stack_a, stack_b, var, arr);
+                get_it_top(stack_a, var, arr, i);
+                push_b_and_rotate(stack_a, stack_b, var ,arr);
             }
-            tmp_stack_a = tmp_stack_a->next;
+            i++;
         }
-        i++;
+        if (!tmp_stack_a)
+            break;
+        tmp_stack_a = tmp_stack_a->next;
     }
-}
-
-t_var   *update_range(t_var *var)
-{
-    var->start = var->offset - var->start;
-    if (var->start < 0)
-        var->start = 0;
-    var->end = var->offset + var->end;
-    if (var->end >= var->size)
-        var->end = var->size - 1;
-    return (var);    
 }
 
 void    first_stage(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
 {
-    if (empty_stack(*stack_a))
-        return ;
-    look_top_in_range(stack_a, stack_b, var, arr);
-    look_in_stack(stack_a, stack_b, var, arr);
-    first_stage(stack_a, stack_b, update_range(var), arr);
+    while(!empty_stack(*stack_a))
+    {
+        look_top_in_range(stack_a, stack_b, var, arr);
+        look_in_stack(stack_a, stack_b, var, arr);
+        update_range(var);
+    }
 }
 
 // line between first stage and seconde stage code
 
-void    find_and_push(t_list **stack_a, t_list **stack_b, t_var *var)
+void    get_max_to_top(t_list **stack_b, t_var *var, int max_val)
 {
-    t_list *tmp_stack_b;
-    int     i;
+    int val_index;
 
-    i = 0;
-    tmp_stack_b = *stack_b;
-    while (tmp_stack_b->value != var->expected_max)
+    val_index = get_val_index(*stack_b, max_val);
+    if (val_index > -1)
     {
-        tmp_stack_b = tmp_stack_b->next;
-        i++;
-    }
-    while ((*stack_b)->value != var->expected_max)
-    {
-        if (i <= var->mid)
-            rotate(stack_b);
+        if (val_index <= (get_stack_size(*stack_b) / 2))
+        {
+            while ((*stack_b)->value != max_val)
+                (rotate(stack_b), ft_putstr_fd("rb\n", 1));
+        }
         else
-            reverse_rotate(stack_b);
+        {
+            while ((*stack_b)->value != max_val)
+                (reverse_rotate(stack_b), ft_putstr_fd("rrb\n", 1));
+        }
     }
-    push(stack_b, stack_a);
+    else
+        return ;
 }
 
-int found_max(int expected_max, t_list *stack_b)
+void    find_max_push(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
+{
+    int max_val;
+
+    max_val = arr[var->size - 1];
+    get_max_to_top(stack_b, var, max_val);
+    push(stack_b, stack_a);
+    var->max_index_arr = var->size - 2;
+    var->expected_max = arr[var->max_index_arr];
+    var->count_bottom = 0;
+}
+
+int found_max(t_list *stack_b, int max_val)
 {
     while (stack_b)
     {
-        if (expected_max == stack_b->value)
-            return (0);
+        if (stack_b->value == max_val)
+            return (1);
         stack_b = stack_b->next;
     }
-    return (1);
+    return (0);
 }
 
-void    no_max_stack_b(t_list **stack_a, t_var *var, int *arr)
+void    max_not_found(t_list **stack_a, t_var *var, int *arr)
 {
-    var->max_index_arr -= 1;
-    var->expected_max = arr[var->max_index_arr];
+    (reverse_rotate(stack_a), ft_putstr_fd("rra\n", 1));
     var->count_bottom -= 1;
-    reverse_rotate(stack_a);
-}
-
-void    max_on_top_b(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
-{
     var->max_index_arr -= 1;
     var->expected_max = arr[var->max_index_arr];
-    push(stack_b, stack_a);
 }
 
-int get_bottom_value(t_list *stack_a)
+void    max_in_top(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
 {
-    while (stack_a->next)
-        stack_a = stack_a->next;
-    return (stack_a->value);
-}
-
-void    max_out_top(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
-{
-    int bottom_a;
-    
-    bottom_a = get_bottom_value(*stack_a);
-    if (!var->count_bottom)
+    if (!empty_stack(*stack_b))
     {
-        push(stack_b, stack_a);
-        rotate(stack_a);
+        (push(stack_b, stack_a), ft_putstr_fd("pa\n", 1));
+        var->max_index_arr -= 1;
+        var->expected_max = arr[var->max_index_arr];
+    }
+    else
+        return ;
+}
+
+int get_bottom_val(t_list *stack)
+{
+    while (stack->next)
+        stack = stack->next;
+    return (stack->value);
+}
+
+void    count_not_zero(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
+{
+    int bottom_val;
+
+    bottom_val = get_bottom_val(*stack_a);
+    if(bottom_val < (*stack_b)->value)
+    {
+        (push(stack_b, stack_a), ft_putstr_fd("pa\n", 1));
+        (rotate(stack_a), ft_putstr_fd("ra\n", 1));
         var->count_bottom += 1;
     }
     else
     {
-        if (bottom_a < (*stack_b)->value)
-            {
-                push(stack_b, stack_a);
-                rotate(stack_a);
-                var->count_bottom += 1;
-            }
-        else
-            {
-                find_and_push(stack_a, stack_b, var);
-                var->max_index_arr -= 1;
-                var->expected_max = arr[var->max_index_arr];
-            }
+        get_max_to_top(stack_b, var, var->expected_max);
+        (push(stack_b, stack_a), ft_putstr_fd("pa\n", 1));
+        var->max_index_arr -= 1;
+        var->expected_max = arr[var->max_index_arr];
     }
 }
 
-void    seconde_stage(t_list **stack_a, t_list **stack_b, int *arr, t_var *var)
+void    max_not_in_top(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
 {
-    var->max_index_arr = var->size - 1;
-    var->expected_max = arr[var->max_index_arr];
-    find_and_push(stack_a, stack_b, var);
-    var->max_index_arr -= 1;
-    var->expected_max = arr[var->max_index_arr];
-    while(!empty_stack(*stack_b))
+    if (!empty_stack(*stack_b))
     {
-        if (found_max(var->expected_max, *stack_b))
-            no_max_stack_b(stack_a, var, arr);
-        if (var->expected_max == (*stack_b)->value)
-            max_on_top_b(stack_a, stack_b, var, arr);
+        if (!var->count_bottom)
+        {
+            (push(stack_b, stack_a), ft_putstr_fd("pa\n", 1));
+            (rotate(stack_a), ft_putstr_fd("ra\n", 1));
+            var->count_bottom += 1;
+        }
         else
-            max_out_top(stack_a, stack_b, var, arr);
+            count_not_zero(stack_a, stack_b, var, arr);
+    }
+}
+
+void    seconde_stage(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
+{
+    find_max_push(stack_a, stack_b, var, arr);
+    while (!empty_stack(*stack_b))
+    {
+        if (!found_max(*stack_b, arr[var->max_index_arr]))
+            max_not_found(stack_a, var, arr);
+        else
+        {
+            if (var->expected_max == (*stack_b)->value)
+                max_in_top(stack_a, stack_b, var, arr);
+            else
+                max_not_in_top(stack_a, stack_b, var, arr);
+        }
     }
     while (var->count_bottom > 0)
     {
         reverse_rotate(stack_a);
-        var->count_bottom--;
-    }
+        var->count_bottom -= 1;
+    }  
 }
 
 void  chunk_sort(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
 {
     collect_var(var);
     first_stage(stack_a, stack_b, var, arr);
-    seconde_stage(stack_a, stack_b, arr, var);
+    seconde_stage(stack_a, stack_b, var, arr);
 }
 
 void sort_stack(t_list **stack_a)
@@ -255,6 +298,8 @@ void sort_stack(t_list **stack_a)
     stack_b = NULL;
     var.size = get_stack_size(*stack_a);
     sorted_array = create_sorted_array(*stack_a, var.size);
+    if (!sorted_array || !var.size)
+        return ;
     chunk_sort(stack_a, &stack_b, &var, sorted_array);
     free(sorted_array);
 }
