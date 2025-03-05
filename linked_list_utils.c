@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 20:12:49 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/28 18:09:17 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/05 02:05:19 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_lstadd_front(t_list **lst, t_list *new, char **parsed_str)
 	t_list	*tmp_lst;
 
 	tmp_lst = *lst;
-	while (tmp_lst)
+	while (tmp_lst->next)
 	{
 		if (tmp_lst->value == new->value)
 		{
@@ -55,8 +55,8 @@ void	ft_lstadd_front(t_list **lst, t_list *new, char **parsed_str)
 		}
 		tmp_lst = tmp_lst->next;
 	}
-	new->next = *lst;
-	*lst = new;
+	tmp_lst->next = new;
+	new->next = NULL;
 }
 
 void	ft_lstclear(t_list **lst)

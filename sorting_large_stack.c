@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 00:42:39 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/05 01:08:37 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/05 02:14:26 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void    first_stage(t_list **stack_a, t_list **stack_b, t_var *var, int *arr)
         else if (val_index <= var->offset)
         {
             (push(stack_a, stack_b), ft_putstr_fd("pb\n", 1));
-            (rotate(stack_b), ft_putstr_fd("rb\n", 1));
+            if (get_stack_size(*stack_b) > 1)
+                (rotate(stack_b), ft_putstr_fd("rb\n", 1));
             update(var, stack_a_size);
         }
         else
