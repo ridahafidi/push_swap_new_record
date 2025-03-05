@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:55 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/05 01:10:44 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/05 01:20:43 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,19 @@ int	main(int ac, char **av)
 		stack_a = fill_stack_a(av);
 		if (!stack_a)
 			return (0);
-		sort_stack(&stack_a);
+		if (!check_sorted_stack(stack_a))
+		{
+			printf("its already sorted dumbass\n");
+			free(stack_a);
+			exit(1);
+		}
+		else
+			sort_stack(&stack_a);
 		// print_stack(stack_a);
 		//check for the stack given if sroted exit if not chunk sort it or simple sort 
 		//fix a simple sort function for size < 10 args
 		//check pasrsing
+		//check leaks
 	}
 	else
 		ft_putstr_fd("wrong usage\n", 2);

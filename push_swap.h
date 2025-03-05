@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/04 23:34:21 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/05 01:14:53 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ int					empty_stack(t_list *stack);
 void				quick_sort(int *arr, int start, int end);
 void 				sort_stack(t_list **stack_a);
 void	print_stack(t_list *stack);
+int	check_sorted_stack(t_list *stack);
 
 #endif
