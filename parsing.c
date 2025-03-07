@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 00:04:05 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/05 02:00:29 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/07 22:35:43 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	handle_parsing(t_list **stack, char *str)
 		if (!valid_nbr(parsed_str[i]))
 		{
 			if (*stack)
-				ft_lstadd_front(stack, ft_lstnew(ft_atoi(parsed_str[i])),
+				ft_lstadd_back(stack, ft_lstnew(ft_atoi(parsed_str[i])),
 					parsed_str);
 			if (!*stack)
 				*stack = ft_lstnew(ft_atoi(parsed_str[i]));
@@ -84,7 +84,7 @@ t_list	*fill_stack_a(char **av)
 		if (!valid_nbr(av[i]))
 		{
 			if (stack)
-				ft_lstadd_front(&stack, ft_lstnew(ft_atoi(av[i])), NULL);
+				ft_lstadd_back(&stack, ft_lstnew(ft_atoi(av[i])), NULL);
 			if (!stack)
 				stack = ft_lstnew(ft_atoi(av[i]));
 		}

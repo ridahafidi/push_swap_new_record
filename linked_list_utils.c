@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 20:12:49 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/05 02:05:19 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/07 22:35:04 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static void	clear_up(t_list **lst, t_list *new)
 	free(new);
 }
 
-void	ft_lstadd_front(t_list **lst, t_list *new, char **parsed_str)
+void	check_duplicated(t_list **lst, t_list *new, char **parsed_str)
 {
 	t_list	*tmp_lst;
 
 	tmp_lst = *lst;
-	while (tmp_lst->next)
+	while (tmp_lst)
 	{
 		if (tmp_lst->value == new->value)
 		{
@@ -55,6 +55,16 @@ void	ft_lstadd_front(t_list **lst, t_list *new, char **parsed_str)
 		}
 		tmp_lst = tmp_lst->next;
 	}
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new, char **parsed_str)
+{
+	t_list	*tmp_lst;
+
+	tmp_lst = *lst;
+	check_duplicated(lst, new, parsed_str);
+	while (tmp_lst->next)
+		tmp_lst = tmp_lst->next;
 	tmp_lst->next = new;
 	new->next = NULL;
 }

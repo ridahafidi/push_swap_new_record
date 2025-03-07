@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/05 02:00:35 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/07 22:44:38 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_var
 }				t_var;
 
 int					ft_atoi(const char *nptr);
-void				ft_lstadd_front(t_list **lst, t_list *new,
+void				ft_lstadd_back(t_list **lst, t_list *new,
 						char **parsed_str);
 t_list				*ft_lstnew(int content);
 void				ft_putstr_fd(char *str, int fd);
@@ -61,5 +61,5 @@ void				quick_sort(int *arr, int start, int end);
 void 				sort_stack(t_list **stack_a);
 void	print_stack(t_list *stack);
 int	check_sorted_stack(t_list *stack);
-
+void				simple_sort(t_list **stack_a);
 #endif
