@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/07 22:44:38 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/08 01:39:27 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@
 
 typedef struct s_list
 {
-	int				value;
+	long			value;
 	struct s_list	*next;
 }					t_list;
 
 typedef struct s_var
 {
-	int	size;
-	int	div;
-	int	offset;
-	int	start;
-	int	end;
-	int	mid;
-	int	count_bottom;
-	int	expected_max;
-	int	max_index_arr;
-}				t_var;
+	int				size;
+	int				div;
+	int				offset;
+	int				start;
+	int				end;
+	int				mid;
+	int				count_bottom;
+	int				expected_max;
+	int				max_index_arr;
+}					t_var;
 
-int					ft_atoi(const char *nptr);
+long				ft_atoi(const char *nptr);
 void				ft_lstadd_back(t_list **lst, t_list *new,
 						char **parsed_str);
 t_list				*ft_lstnew(int content);
@@ -58,8 +58,12 @@ void				reverse_rotate(t_list **stack);
 int					get_stack_size(t_list *stack);
 int					empty_stack(t_list *stack);
 void				quick_sort(int *arr, int start, int end);
-void 				sort_stack(t_list **stack_a);
-void	print_stack(t_list *stack);
-int	check_sorted_stack(t_list *stack);
+void				sort_stack(t_list **stack_a);
+void				print_stack(t_list *stack);
+int					check_sorted_stack(t_list *stack);
 void				simple_sort(t_list **stack_a);
+void				first_stage(t_list **stack_a, t_list **stack_b, t_var *var,
+						int *arr);
+void				seconde_stage(t_list **stack_a, t_list **stack_b);
+
 #endif

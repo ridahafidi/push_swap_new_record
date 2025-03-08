@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:55 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/07 23:39:14 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/08 01:45:37 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int ac, char **av)
 		stack_size = get_stack_size(stack_a);
 		if (!check_sorted_stack(stack_a))
 		{
-			printf("its already sorted dumbass\n");
+			ft_putstr_fd("give a SEQUENCE of UNSORTED numbers\n",
+				2);
 			ft_lstclear(&stack_a);
 			exit(1);
 		}
@@ -36,6 +37,6 @@ int	main(int ac, char **av)
 		ft_lstclear(&stack_a);
 	}
 	else
-		ft_putstr_fd("wrong usage\n", 2);
+		ft_putstr_fd("ERROR: wrong usage\n", 2);
 	return (0);
 }

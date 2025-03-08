@@ -6,11 +6,30 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 00:04:05 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/07 22:35:43 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/08 02:32:15 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	handle_max_min(char *str)
+{
+	long	max_int;
+	int		nbr_len;
+	long	min_int;
+	long	number;
+
+	nbr_len = 0;
+	while(str[nbr_len])
+		nbr_len++;
+	max_int = 2147483647;
+	min_int = -2147483648;
+	number = ft_atoi(str);
+	if (number > max_int || number < min_int || nbr_len > 13)
+		return (1);
+	else
+		return (0);
+}
 
 static int	valid_nbr(char *str)
 {
@@ -25,6 +44,8 @@ static int	valid_nbr(char *str)
 			return (1);
 		i++;
 	}
+	if (handle_max_min(str))
+		return (1);
 	return (0);
 }
 

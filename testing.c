@@ -25,7 +25,7 @@ static int	partition(int *arr, int start, int end)
 		if (arr[j] < arr[pivot])
 		{
 			i++;
-			ft_swap(arr, i , j);
+			ft_swap(arr, i, j);
 		}
 		j++;
 	}
@@ -48,20 +48,21 @@ void	quick_sort(int *arr, int start, int end)
 	quick_sort(arr, pivot + 1, end);
 }
 
-int	main()
+int	main(void)
 {
-	int	arr[500];
+	int arr[500];
 	srand(time(NULL));
-    
-    // Generate 500 random numbers
-    for (int i = 0; i < 500; i++) {
-        arr[i] = (rand() % MAX_VALUE) + 1;
-    }
-    
-	for (int i = 0; i < sizeof(arr)/sizeof(int); i++)
+
+	// Generate 500 random numbers
+	for (int i = 0; i < 500; i++)
+	{
+		arr[i] = (rand() % MAX_VALUE) + 1;
+	}
+
+	for (int i = 0; i < sizeof(arr) / sizeof(int); i++)
 		printf("%d, ", arr[i]);
-	quick_sort(arr, 0, ((sizeof(arr)/sizeof(int)) - 1));
+	quick_sort(arr, 0, ((sizeof(arr) / sizeof(int)) - 1));
 	printf("\n");
-	for (int i = 0; i < sizeof(arr)/sizeof(int); i++)
+	for (int i = 0; i < sizeof(arr) / sizeof(int); i++)
 		printf("%d, ", arr[i]);
 }

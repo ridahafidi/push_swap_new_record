@@ -35,7 +35,7 @@ static int	partition(int *arr, int start, int end)
 		if (arr[j] < arr[pivot])
 		{
 			i++;
-			ft_swap(arr, i , j);
+			ft_swap(arr, i, j);
 		}
 		j++;
 	}

@@ -6,17 +6,17 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:05:11 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/02/27 21:52:38 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/08 02:02:18 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int		i;
+	long	sign;
+	long	result;
 
 	result = 0;
 	sign = 1;
