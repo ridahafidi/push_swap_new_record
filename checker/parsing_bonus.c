@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 04:02:10 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/08 04:15:03 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/09 00:01:16 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,25 @@ int	handle_max_min(char *str)
 	long	max_int;
 	int		nbr_len;
 	long	min_int;
+	int		i;
 	long	number;
 
 	nbr_len = 0;
-	while(str[nbr_len])
-		nbr_len++;
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i] == '0')
+		i++;
+	while (str[i])
+	{
+		if (!is_digit(str[i]))
+			nbr_len++;
+		i++;
+	}
 	max_int = 2147483647;
 	min_int = -2147483648;
 	number = ft_atoi(str);
-	if (number > max_int || number < min_int || nbr_len > 13)
+	if (number > max_int || number < min_int || nbr_len > 15)
 		return (1);
 	else
 		return (0);
@@ -36,8 +46,12 @@ static int	valid_nbr(char *str)
 	int	i;
 
 	i = 0;
+	if (!str[i])
+		return (-1);
 	if (str[i] == '+' || str[i] == '-')
 		i++;
+	if (!str[i])
+		return (-1);
 	while (str[i])
 	{
 		if (is_digit(str[i]))
@@ -102,7 +116,13 @@ t_list	*fill_stack_a(char **av)
 	i = 1;
 	while (av[i])
 	{
-		if (!valid_nbr(av[i]))
+		if (valid_nbr(av[i]) == -1)
+		{
+			ft_lstclear(&stack);
+			ft_putstr_fd("Error\n", 2);
+			exit(0);
+		}
+		else if (!valid_nbr(av[i]))
 		{
 			if (stack)
 				ft_lstadd_back(&stack, ft_lstnew(ft_atoi(av[i])), NULL);

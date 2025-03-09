@@ -27,10 +27,10 @@ int	get_stack_size(t_list *stack)
 
 void	swap(t_list **stack)
 {
+		t_list *tmp_first;
+
 	if (get_stack_size(*stack) > 1)
 	{
-		t_list	*tmp_first;
-	
 		tmp_first = *stack;
 		*stack = (*stack)->next;
 		tmp_first->next = (*stack)->next;
@@ -40,13 +40,14 @@ void	swap(t_list **stack)
 
 void	ss(t_list **stack1, t_list **stack2)
 {
-		swap(stack1);
-		swap(stack2);
+	swap(stack1);
+	swap(stack2);
 }
 
 void	push(t_list **stack1, t_list **stack2)
 {
 	t_list	*tmp_stack1;
+
 	if (get_stack_size(*stack1) > 0)
 	{
 		if (!(*stack1)->next)
@@ -68,7 +69,8 @@ void	rotate(t_list **stack)
 {
 	t_list	*tmp_stack;
 	t_list	*last_node;
-	if(get_stack_size(*stack) > 1)
+
+	if (get_stack_size(*stack) > 1)
 	{
 		tmp_stack = *stack;
 		last_node = *stack;
@@ -76,7 +78,7 @@ void	rotate(t_list **stack)
 		while (last_node->next)
 			last_node = last_node->next;
 		last_node->next = tmp_stack;
-		tmp_stack->next = NULL;	
+		tmp_stack->next = NULL;
 	}
 }
 
@@ -89,6 +91,7 @@ void	reverse_rotate(t_list **stack)
 {
 	t_list	*last;
 	t_list	*before_last;
+
 	if (get_stack_size(*stack) > 1)
 	{
 		before_last = *stack;
@@ -97,7 +100,7 @@ void	reverse_rotate(t_list **stack)
 		last = before_last->next;
 		last->next = *stack;
 		before_last->next = NULL;
-		*stack = last;	
+		*stack = last;
 	}
 }
 
