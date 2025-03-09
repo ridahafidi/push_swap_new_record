@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 03:49:11 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/09 00:13:12 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/09 03:54:38 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ size_t				length_to_newline(t_data *list);
 void				copy_the_line(char *line, t_data *list);
 char				*get_next_line(int fd);
 int					is_newline(char c);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					get_stack_size(t_list *stack);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10

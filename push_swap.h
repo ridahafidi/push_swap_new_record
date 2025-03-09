@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:04:58 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/08 01:39:27 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/09 03:11:12 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void				simple_sort(t_list **stack_a);
 void				first_stage(t_list **stack_a, t_list **stack_b, t_var *var,
 						int *arr);
 void				seconde_stage(t_list **stack_a, t_list **stack_b);
+int					fetch_max_index(t_list *stack_a);
 
 #endif

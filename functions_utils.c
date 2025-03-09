@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 01:04:03 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/08 01:40:14 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/09 03:11:58 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,26 @@ int	check_sorted_stack(t_list *stack)
 			return (-1);
 	}
 	return (0);
+}
+
+int	fetch_max_index(t_list *stack_a)
+{
+	int	max_val;
+	int	max_index;
+	int	i;
+
+	max_index = 0;
+	i = 0;
+	max_val = stack_a->value;
+	while (stack_a)
+	{
+		if (max_val < stack_a->value)
+		{
+			max_val = stack_a->value;
+			max_index = i;
+		}
+		i++;
+		stack_a = stack_a->next;
+	}
+	return (max_index);
 }

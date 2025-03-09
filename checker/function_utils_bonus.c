@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   function_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 18:04:55 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/09 01:56:37 by rhafidi          ###   ########.fr       */
+/*   Created: 2025/03/09 03:46:28 by rhafidi           #+#    #+#             */
+/*   Updated: 2025/03/09 03:49:25 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-int	main(int ac, char **av)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_list	*stack_a;
-	int		stack_size;
-
-	if (ac > 1)
+	while (n > 0)
 	{
-		stack_a = fill_stack_a(av);
-		if (!stack_a)
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		if (!*s1)
 			return (0);
-		stack_size = get_stack_size(stack_a);
-		if (!check_sorted_stack(stack_a))
-		{
-			ft_lstclear(&stack_a);
-			exit(1);
-		}
-		if (stack_size <= 10)
-			simple_sort(&stack_a);
-		else
-			sort_stack(&stack_a);
-		ft_lstclear(&stack_a);
+		s1++;
+		s2++;
+		n--;
 	}
 	return (0);
+}
+
+int	get_stack_size(t_list *stack)
+{
+	int	length;
+
+	length = 0;
+	while (stack)
+	{
+		length++;
+		stack = stack->next;
+	}
+	return (length);
 }

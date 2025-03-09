@@ -6,7 +6,7 @@ SRC = first_stage.c functions_utils.c linked_list_utils.c\
 OBJS = ${SRC:.c=.o}
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 all : ${NAME}
 

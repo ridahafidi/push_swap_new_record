@@ -6,7 +6,7 @@
 /*   By: rhafidi <rhafidi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 00:04:05 by rhafidi           #+#    #+#             */
-/*   Updated: 2025/03/08 23:59:56 by rhafidi          ###   ########.fr       */
+/*   Updated: 2025/03/09 01:51:35 by rhafidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void	handle_parsing(t_list **stack, char *str)
 		{
 			ft_lstclear(stack);
 			free_array(parsed_str);
-			ft_putstr_fd("ERROR: There is an invalid argument\n", 2);
+			ft_putstr_fd("Error\n", 2);
 			exit(0);
 		}
 		i++;
@@ -119,7 +119,7 @@ t_list	*fill_stack_a(char **av)
 		if (valid_nbr(av[i]) == -1)
 		{
 			ft_lstclear(&stack);
-			ft_putstr_fd("ERROR: There is an invalid argument\n", 2);
+			ft_putstr_fd("Error\n", 2);
 			exit(0);
 		}
 		else if (!valid_nbr(av[i]))
